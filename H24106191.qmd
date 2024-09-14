@@ -1,0 +1,56 @@
+---
+title: "H24106191"
+format: html
+editor: visual
+---
+
+```{r}
+library(palmerpenguins)
+data(package = 'palmerpenguins')
+head(penguins)
+```
+
+```{r}
+head(penguins_raw)
+```
+
+```{r}
+library(dplyr)
+penguins %>% 
+  group_by(species) %>% 
+  summarize(across(where(is.numeric), mean, na.rm = TRUE))
+```
+
+```{r}
+library(ggplot2)
+
+ggplot(penguins, aes(x = species)) +
+  geom_bar(fill = "skyblue", color = "black") +
+  labs(title = "Count of Penguin Species", x = "Species", y = "Count")
+```
+
+---
+可以得知物種最多的為Adelie、最少的是Chinstrap
+---
+
+```{r}
+ggplot(penguins, aes(x = bill_length_mm, y = body_mass_g, color = species)) +
+  geom_point() +
+  labs(title = "Penguin Body Mass vs Bill Length", x = "Bill Length (mm)", y = "Body Mass (g)") +
+  theme_minimal()
+```
+
+---
+由上述分析可知Gentoo的體型分布相對大；Chinstrap的嘴巴長度相對長
+---
+
+```{r}
+ggplot(penguins, aes(x = species, y = body_mass_g, fill = species)) +
+  geom_boxplot() +
+  labs(title = "Body Mass Distribution by Species", x = "Species", y = "Body Mass (g)") +
+  theme_minimal()
+```
+
+---
+由上述所有分析可以知道，物種最多的為Adelie、最少的是Chinstrap；Gentoo的體型分布相對大；Chinstrap的嘴巴長度相對長；由上述分析可知Gentoo的組內變異較大；而Chinstrap的組內分布較均勻。
+---
